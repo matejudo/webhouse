@@ -1,0 +1,15 @@
+<div style="height: 52px;">
+	<?php for($i=0; $i<8; $i++): ?>
+		<a class="product" href="<?= $this->baseUrl ?>/product/view/id/<?= $x = rand(100, 999); ?>"><?= $x ?></a>
+	<?php endfor; ?>
+</div>
+<p class="clear" style="padding-top: 50px;">
+	<?php
+
+		foreach($this->actions as $action)
+		{
+			echo "$action->time : $action->class $action->action $action->target<br/>";
+		}
+	
+	?>
+</p>

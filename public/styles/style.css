@@ -1,2 +1,27 @@
-.black { background: black; }
-.white { background: white; }
+.clear { clear: both; }
+html { font: 62.5%/1.5 "Lucida Grande", Verdana, sans-serif; }
+ul, ol, dl, p { margin-bottom: 1.5em; font-size: 1.2em; }
+li, dt, dd, p { font-size: 1.2em; }
+ul, ol, dl, p { margin-bottom: 1.5em; }
+li, dt, dd, p { font-size: 1.2em; }
+ul, ol, dl { margin-bottom: 1.8em; }
+p { margin-bottom: 1.5em; }
+
+body { background: #a1c2dd url(../images/topbg.png) repeat-x; }
+
+#header { height: 120px; }
+
+#wrapper { background: url(../images/mainbg.png) repeat-y;  top: 120px; }
+	#menubar { background: url(../images/menubg.png) no-repeat; height: 33px; padding-top: 10px; overflow: hidden; }
+		#menu { font-weight: bold; text-transform: uppercase; width: 600px; margin-left: 20px; margin-top: 10px; width: 600px; float: left; }
+			#menu li { display: inline; list-style: none; margin-left: 20px;  }
+			#menu a { color: white; text-decoration: none; font-size: 0.8em; }
+		#searchbox { border: 2px solid #767676; background: white; float:right; margin: 5px 20px 0px 0px; 
+					 color: #767676; width: 140px; height: 16px; padding-right: 20px; font-weight: bold;
+					 background: white url(../images/searchicon.png) center right no-repeat; }
+		#searchbox:focus { border: 2px solid #a2c2dd; }
+	#pathbar { background: #484e54; height: 32px; }
+	#sidebar { background: white; }
+	#content { background: white; text-transform:   }
+
+.product { width: 20px; height: 20px; padding: 20px; margin-right: 10px; float:left; border: 1px solid #999999; }

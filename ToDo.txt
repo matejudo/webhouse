@@ -1,0 +1,19 @@
+Session	Akcije:
+	Product:
+		view (target: product)
+		compare (target: product, info: lista proizvoda)
+	Category:
+		view (target; category)
+	Search
+		search (target: term, info: stranica)
+		click_result (target: product, info: redni broj rezultata - moze se izracunati stranica)
+	Auth
+		login (target: stranica, info: enforced)
+		logout (target: stranica, info: order_abort, order_finished, no_order)
+		view_page (target: stranica, info: referrer)
+	Basket
+		additem (target: product, info: kolicina)
+		removeitem (target: product, info: kolicina)
+	Order
+		order
+		itd.
