@@ -19,10 +19,10 @@ $frontController = Zend_Controller_Front::getInstance();
 
 // Step 3: CONTROLLER DIRECTORY SETUP - Point the front controller to your action
 // controller directory.
-$frontController->addModuleDirectory(APPLICATION_PATH . 'modules');
+$frontController->addModuleDirectory(APPLICATION_PATH . '/modules');
 $frontController->setControllerDirectory(array(
-											"default" => APPLICATION_PATH . "controllers",
-											"admin" => APPLICATION_PATH . "modules/admin/controllers"
+											"default" => APPLICATION_PATH . "/controllers",
+											"admin" => APPLICATION_PATH . "/modules/admin/controllers"
 										));
 
 // Step 4: APPLICATION ENVIRONMENT - Set the current environment.
