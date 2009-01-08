@@ -56,6 +56,7 @@ $registry->configuration = $configuration;
 // "database" section of the configuration obj.
 $dbAdapter = Zend_Db::factory($configuration->db);
 $dbAdapter->setFetchMode(Zend_Db::FETCH_OBJ);
+$dbAdapter->query("SET NAMES 'utf8' COLLATE 'utf8_unicode_ci'");
 
 // DATABASE TABLE SETUP - Setup the Database Table Adapter
 // Since our application will be utilizing the Zend_Db_Table component, we need 
