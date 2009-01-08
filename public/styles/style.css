@@ -1,9 +1,7 @@
 .clear { clear: both; }
 html { font: 62.5%/1.5 "Lucida Grande", Verdana, sans-serif; }
-ul, ol, dl, p { margin-bottom: 1.5em; font-size: 1.2em; }
-li, dt, dd, p { font-size: 1.2em; }
+ul, ol, dl, p { margin-bottom: 1.5em; margin-left: 10px; font-size: 12px;}
 ul, ol, dl, p { margin-bottom: 1.5em; }
-li, dt, dd, p { font-size: 1.2em; }
 ul, ol, dl { margin-bottom: 1.8em; }
 p { margin-bottom: 1.5em; }
 
@@ -22,6 +20,13 @@ body { background: #a1c2dd url(../images/topbg.png) repeat-x; }
 		#searchbox:focus { border: 2px solid #a2c2dd; }
 	#pathbar { background: #484e54; height: 32px; }
 	#sidebar { background: white; }
-	#content { background: white; text-transform:   }
+	#content { background: white;   }
 
 .product { width: 20px; height: 20px; padding: 20px; margin-right: 10px; float:left; border: 1px solid #999999; }
+
+.category li { font-size: 14px; margin-bottom: 5px; }
+.category ul li { list-style: circle; margin-left: 20px; }
+.newcategory { font-size: 14px; padding: 2px; width: 100px; border: 1px solid #ddd; }
+
+#messages { border: 2px solid red; text-align: center; padding: 10px 10px 10px 10px; margin: 0px 40px 20px 0px; }
+#messages p { margin: 0; padding: 0; }

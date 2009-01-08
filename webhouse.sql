@@ -2,180 +2,171 @@
 -- version 2.11.3
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Dec 13, 2008 at 04:00 PM
--- Server version: 5.0.51
--- PHP Version: 5.2.5
+-- Računalo: localhost
+-- Vrijeme generiranja: Sij 08, 2009 u 02:54 PM
+-- Verzija poslužitelja: 5.0.51
+-- PHP verzija: 5.2.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- Database: `webhouse`
+-- Baza podataka: `webhouse`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `action`
+-- Tablična struktura za tablicu `address`
 --
 
-CREATE TABLE `action` (
-  `action_id` int(11) NOT NULL auto_increment,
-  `session_id` varchar(32) collate utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `address`;
+CREATE TABLE `address` (
+  `address_id` int(11) NOT NULL auto_increment,
+  `customer_id` int(11) NOT NULL,
+  `street` varchar(250) collate utf8_unicode_ci NOT NULL,
+  `zipCode` varchar(5) collate utf8_unicode_ci NOT NULL,
+  `countryCode` varchar(2) collate utf8_unicode_ci NOT NULL,
+  `defaultAddress` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`address_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Izbacivanje podataka za tablicu `address`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `attribute`
+--
+
+DROP TABLE IF EXISTS `attribute`;
+CREATE TABLE `attribute` (
+  `product_id` int(11) NOT NULL,
+  `attributetype_id` int(11) NOT NULL,
+  `value` varchar(50) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`product_id`,`attributetype_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Izbacivanje podataka za tablicu `attribute`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `attributetype`
+--
+
+DROP TABLE IF EXISTS `attributetype`;
+CREATE TABLE `attributetype` (
+  `attributetype_id` int(11) NOT NULL auto_increment,
+  `attributetypeName` varchar(50) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`attributetype_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Izbacivanje podataka za tablicu `attributetype`
+--
+
+INSERT INTO `attributetype` (`attributetype_id`, `attributetypeName`) VALUES
+(1, 'Gender'),
+(2, 'Top Note'),
+(3, 'Heart Note'),
+(4, 'Base Note');
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category` (
+  `category_id` int(11) NOT NULL auto_increment,
+  `parent_id` int(11) default NULL,
+  `name` varchar(250) collate utf8_unicode_ci NOT NULL,
+  `ordering` int(10) unsigned NOT NULL default '0',
+  `description` text collate utf8_unicode_ci NOT NULL,
+  `thumbnail` varchar(250) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`category_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
+
+--
+-- Izbacivanje podataka za tablicu `category`
+--
+
+INSERT INTO `category` (`category_id`, `parent_id`, `name`, `ordering`, `description`, `thumbnail`) VALUES
+(14, 13, 'Za djecu', 0, '', ''),
+(12, NULL, 'Parfemi', 0, '', ''),
+(13, NULL, 'Šamponi', 0, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `categoryview`
+--
+
+DROP TABLE IF EXISTS `categoryview`;
+CREATE TABLE `categoryview` (
+  `categoryview_id` int(11) NOT NULL auto_increment,
+  `session_id` int(11) NOT NULL,
   `time` timestamp NOT NULL default CURRENT_TIMESTAMP,
-  `class` enum('product','category','auth','order','basket','search') collate utf8_unicode_ci NOT NULL,
-  `action` varchar(50) collate utf8_unicode_ci NOT NULL,
-  `target` varchar(250) collate utf8_unicode_ci default NULL,
-  `info` varchar(250) collate utf8_unicode_ci default NULL,
-  PRIMARY KEY  (`action_id`),
-  KEY `session_id` (`session_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=152 ;
+  `product_id` int(11) NOT NULL,
+  PRIMARY KEY  (`categoryview_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `action`
+-- Izbacivanje podataka za tablicu `categoryview`
 --
 
-INSERT INTO `action` (`action_id`, `session_id`, `time`, `class`, `action`, `target`, `info`) VALUES
-(19, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:21:06', 'product', 'view', '5', NULL),
-(20, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:21:33', 'product', 'view', '123', NULL),
-(21, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:21:37', 'product', 'view', '143', NULL),
-(22, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:27:27', 'product', 'view', '143', NULL),
-(23, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:27:50', 'product', 'view', '143', NULL),
-(24, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:27:57', 'product', 'view', '143', NULL),
-(25, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:28:09', 'product', 'view', '143', NULL),
-(26, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:31:36', 'product', 'view', '143', NULL),
-(27, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:31:44', 'product', 'view', '143', NULL),
-(28, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:32:15', 'product', 'view', '143', NULL),
-(29, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:37:00', 'product', 'view', '143', NULL),
-(30, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:37:53', 'product', 'view', '143', NULL),
-(31, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:39:31', 'product', 'view', '143', NULL),
-(32, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:39:34', 'product', 'view', '471', NULL),
-(33, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:57:33', 'product', 'view', '471', NULL),
-(34, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:57:38', 'product', 'view', '608', NULL),
-(35, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:57:39', 'product', 'view', '435', NULL),
-(36, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:57:41', 'product', 'view', '198', NULL),
-(37, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:57:43', 'product', 'view', '520', NULL),
-(38, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:57:44', 'product', 'view', '675', NULL),
-(39, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:58:05', 'product', 'view', '675', NULL),
-(40, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:58:23', 'product', 'view', '675', NULL),
-(41, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:58:24', 'product', 'view', '675', NULL),
-(42, 'd98840f06c765bb376889612639632b6', '2008-12-09 00:58:42', 'product', 'view', '675', NULL),
-(43, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 00:58:58', 'product', 'view', '675', NULL),
-(44, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:16', 'product', 'view', '675', NULL),
-(45, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:18', 'product', 'view', '232', NULL),
-(46, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:20', 'product', 'view', '253', NULL),
-(47, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:21', 'product', 'view', '640', NULL),
-(48, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:22', 'product', 'view', '459', NULL),
-(49, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:23', 'product', 'view', '456', NULL),
-(50, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:24', 'product', 'view', '874', NULL),
-(51, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:26', 'product', 'view', '314', NULL),
-(52, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:27', 'product', 'view', '119', NULL),
-(53, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:28', 'product', 'view', '302', NULL),
-(54, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:30', 'product', 'view', '389', NULL),
-(55, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:31', 'product', 'view', '475', NULL),
-(56, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:32', 'product', 'view', '902', NULL),
-(57, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:46', 'product', 'view', '946', NULL),
-(58, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:48', 'product', 'view', '192', NULL),
-(59, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:49', 'product', 'view', '643', NULL),
-(60, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:50', 'product', 'view', '555', NULL),
-(61, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:52', 'product', 'view', '879', NULL),
-(62, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:52', 'product', 'view', '605', NULL),
-(63, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:53', 'product', 'view', '409', NULL),
-(64, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:53', 'product', 'view', '965', NULL),
-(65, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:55', 'product', 'view', '794', NULL),
-(66, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:56', 'product', 'view', '873', NULL),
-(67, '9fe5fed90eb0f0e1e1e5ffec14267add', '2008-12-09 01:01:57', 'product', 'view', '988', NULL),
-(68, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:36', 'product', 'view', '988', NULL),
-(69, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:42', 'product', 'view', '750', NULL),
-(70, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:44', 'product', 'view', '590', NULL),
-(71, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:45', 'product', 'view', '269', NULL),
-(72, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:46', 'product', 'view', '177', NULL),
-(73, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:47', 'product', 'view', '659', NULL),
-(74, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:48', 'product', 'view', '762', NULL),
-(75, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:49', 'product', 'view', '379', NULL),
-(76, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:50', 'product', 'view', '165', NULL),
-(77, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:51', 'product', 'view', '739', NULL),
-(78, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:52', 'product', 'view', '213', NULL),
-(79, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:53', 'product', 'view', '680', NULL),
-(80, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:54', 'product', 'view', '491', NULL),
-(81, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:02:55', 'product', 'view', '772', NULL),
-(82, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:05:04', 'product', 'view', '772', NULL),
-(83, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:05:06', 'product', 'view', '367', NULL),
-(84, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:05:09', 'product', 'view', '145', NULL),
-(85, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:05:12', 'product', 'view', '179', NULL),
-(86, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:05:16', 'product', 'view', '842', NULL),
-(87, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:05:18', 'product', 'view', '111', NULL),
-(88, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:05:19', 'product', 'view', '501', NULL),
-(89, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:05:21', 'product', 'view', '474', NULL),
-(90, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:05:23', 'product', 'view', '559', NULL),
-(91, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:05:24', 'product', 'view', '662', NULL),
-(92, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:05:32', 'product', 'view', '191', NULL),
-(93, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:05:34', 'product', 'view', '638', NULL),
-(94, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:05:36', 'product', 'view', '413', NULL),
-(95, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:05:37', 'product', 'view', '661', NULL),
-(96, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:05:39', 'product', 'view', '279', NULL),
-(97, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:05:40', 'product', 'view', '579', NULL),
-(98, 'd3aa497a6007aeceed7e4c3c0dcc6dd4', '2008-12-09 01:08:27', 'product', 'view', NULL, NULL),
-(99, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:08:53', 'product', 'view', NULL, NULL),
-(100, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:08:57', 'product', 'view', '834', NULL),
-(101, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:08:59', 'product', 'view', '578', NULL),
-(102, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:00', 'product', 'view', '338', NULL),
-(103, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:01', 'product', 'view', '653', NULL),
-(104, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:02', 'product', 'view', '230', NULL),
-(105, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:03', 'product', 'view', '633', NULL),
-(106, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:04', 'product', 'view', '890', NULL),
-(107, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:05', 'product', 'view', '502', NULL),
-(108, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:05', 'product', 'view', '963', NULL),
-(109, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:07', 'product', 'view', '563', NULL),
-(110, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:08', 'product', 'view', '184', NULL),
-(111, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:08', 'product', 'view', '825', NULL),
-(112, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:09', 'product', 'view', '657', NULL),
-(113, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:10', 'product', 'view', '240', NULL),
-(114, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:11', 'product', 'view', '114', NULL),
-(115, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:12', 'product', 'view', '206', NULL),
-(116, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:13', 'product', 'view', '961', NULL),
-(117, 'ad7ca82a0ca108a75159907eaaa465eb', '2008-12-09 01:09:14', 'product', 'view', '640', NULL),
-(118, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:09:17', 'product', 'view', '661', NULL),
-(119, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:09:19', 'product', 'view', '569', NULL),
-(120, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:09:20', 'product', 'view', '244', NULL),
-(121, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:09:21', 'product', 'view', '935', NULL),
-(122, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:09:22', 'product', 'view', '712', NULL),
-(123, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:09:23', 'product', 'view', '262', NULL),
-(124, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:09:23', 'product', 'view', '375', NULL),
-(125, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:09:24', 'product', 'view', '800', NULL),
-(126, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:09:25', 'product', 'view', '509', NULL),
-(127, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:09:26', 'product', 'view', '967', NULL),
-(128, 'dd797bec0e602045d95bb7722086ea7b', '2008-12-09 01:09:26', 'product', 'view', '477', NULL),
-(129, '082eecc4d04ed6c241a2735f8e14641e', '2008-12-09 01:17:49', 'product', 'view', '640', NULL),
-(130, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 10:18:37', 'product', 'view', '640', NULL),
-(131, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 10:24:11', 'product', 'view', '143', NULL),
-(132, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 10:24:14', 'product', 'view', '143', NULL),
-(133, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 10:24:33', 'product', 'view', '236', NULL),
-(134, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:20:22', 'product', 'view', '236', NULL),
-(135, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:20:23', 'product', 'view', '255', NULL),
-(136, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:20:24', 'product', 'view', '713', NULL),
-(137, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:20:26', 'product', 'view', '978', NULL),
-(138, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:44:29', 'product', 'view', '640', NULL),
-(139, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:44:36', 'product', 'view', '420', NULL),
-(140, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:44:37', 'product', 'view', '116', NULL),
-(141, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:44:38', 'product', 'view', '967', NULL),
-(142, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:44:40', 'product', 'view', '873', NULL),
-(143, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:44:41', 'product', 'view', '112', NULL),
-(144, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:44:42', 'product', 'view', '341', NULL),
-(145, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:44:43', 'product', 'view', '664', NULL),
-(146, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:44:44', 'product', 'view', '467', NULL),
-(147, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:52:39', 'product', 'view', '247', NULL),
-(148, 'b969feac04e5a64f6907fc65aeeec4df', '2008-12-09 11:53:07', 'product', 'view', '708', NULL),
-(149, '950894dbfdb7e03a8a88c1613ca93ba5', '2008-12-09 15:33:30', 'product', 'view', '708', NULL),
-(150, '950894dbfdb7e03a8a88c1613ca93ba5', '2008-12-09 23:03:09', 'product', 'view', '899', NULL),
-(151, '950894dbfdb7e03a8a88c1613ca93ba5', '2008-12-09 23:03:11', 'product', 'view', '581', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Tablična struktura za tablicu `city`
 --
 
+DROP TABLE IF EXISTS `city`;
+CREATE TABLE `city` (
+  `zipCode` varchar(5) collate utf8_unicode_ci NOT NULL,
+  `countryCode` varchar(2) collate utf8_unicode_ci NOT NULL,
+  `cityName` varchar(50) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`zipCode`,`countryCode`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Izbacivanje podataka za tablicu `city`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `country`
+--
+
+DROP TABLE IF EXISTS `country`;
+CREATE TABLE `country` (
+  `countryCode` varchar(2) collate utf8_unicode_ci NOT NULL,
+  `name` varchar(50) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`countryCode`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Izbacivanje podataka za tablicu `country`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `customer`
+--
+
+DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `customer_id` int(11) NOT NULL auto_increment,
   `firstname` varchar(50) collate utf8_unicode_ci NOT NULL,
@@ -189,7 +180,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `customer`
+-- Izbacivanje podataka za tablicu `customer`
 --
 
 INSERT INTO `customer` (`customer_id`, `firstname`, `lastname`, `title`, `phone`, `mobile`, `fax`, `email`) VALUES
@@ -199,9 +190,315 @@ INSERT INTO `customer` (`customer_id`, `firstname`, `lastname`, `title`, `phone`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `session`
+-- Tablična struktura za tablicu `discount`
 --
 
+DROP TABLE IF EXISTS `discount`;
+CREATE TABLE `discount` (
+  `discount_id` int(11) NOT NULL auto_increment,
+  `title` varchar(250) collate utf8_unicode_ci NOT NULL,
+  `description` text collate utf8_unicode_ci NOT NULL,
+  `factor` float NOT NULL,
+  `beginDate` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `endDate` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`discount_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Izbacivanje podataka za tablicu `discount`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `file`
+--
+
+DROP TABLE IF EXISTS `file`;
+CREATE TABLE `file` (
+  `file_id` int(11) NOT NULL auto_increment,
+  `product_id` int(11) NOT NULL,
+  `fileName` varchar(250) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`file_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Izbacivanje podataka za tablicu `file`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `manufacturer`
+--
+
+DROP TABLE IF EXISTS `manufacturer`;
+CREATE TABLE `manufacturer` (
+  `manufacturer_id` int(11) NOT NULL auto_increment,
+  `name` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `street` varchar(250) collate utf8_unicode_ci default NULL,
+  `zipCode` varchar(5) collate utf8_unicode_ci default NULL,
+  `countryCode` varchar(2) collate utf8_unicode_ci default NULL,
+  `contactPerson` varchar(50) collate utf8_unicode_ci default NULL,
+  `email` varchar(50) collate utf8_unicode_ci default NULL,
+  `phone` varchar(50) collate utf8_unicode_ci default NULL,
+  `fax` varchar(50) collate utf8_unicode_ci default NULL,
+  `mobile` varchar(50) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`manufacturer_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
+
+--
+-- Izbacivanje podataka za tablicu `manufacturer`
+--
+
+INSERT INTO `manufacturer` (`manufacturer_id`, `name`, `street`, `zipCode`, `countryCode`, `contactPerson`, `email`, `phone`, `fax`, `mobile`) VALUES
+(1, 'Yves Saint Laurent', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'Calvin Klein', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'Giorgio Armani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'Dolce Gabbana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'Boss', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'Bvlgari', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'Carolina Herrera', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'Cerruti', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 'Davidoff', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 'Diesel', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 'DKNY', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 'Elizabeth Taylor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(13, 'Emporio Armani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 'Guess', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(15, 'Karl Lagerfeld', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(16, 'Police', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 'Prada', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 'Ralph Lauren', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 'Tommy Hilfiger', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(20, 'Versace', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 'Calvin Klein', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(22, 'Dior', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 'Estee Lauder', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(24, 'Yves Saint Laurent', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(25, 'Givenchy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `offer`
+--
+
+DROP TABLE IF EXISTS `offer`;
+CREATE TABLE `offer` (
+  `offer_id` int(11) NOT NULL auto_increment,
+  `name` varchar(250) collate utf8_unicode_ci NOT NULL,
+  `description` text collate utf8_unicode_ci NOT NULL,
+  `beginDate` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `endDate` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`offer_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Izbacivanje podataka za tablicu `offer`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `offerdetail`
+--
+
+DROP TABLE IF EXISTS `offerdetail`;
+CREATE TABLE `offerdetail` (
+  `offerdetail_id` int(11) NOT NULL auto_increment,
+  `offer_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `ordering` int(11) NOT NULL,
+  PRIMARY KEY  (`offerdetail_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Izbacivanje podataka za tablicu `offerdetail`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `order`
+--
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+  `order_id` int(11) NOT NULL auto_increment,
+  `session_id` int(11) NOT NULL,
+  `shippingaddress_id` int(11) NOT NULL,
+  `discount_id` int(11) NOT NULL,
+  `transaction` int(11) NOT NULL,
+  PRIMARY KEY  (`order_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Izbacivanje podataka za tablicu `order`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `orderdetail`
+--
+
+DROP TABLE IF EXISTS `orderdetail`;
+CREATE TABLE `orderdetail` (
+  `orderdetail_id` int(11) NOT NULL auto_increment,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `delta` int(11) NOT NULL,
+  `time` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`orderdetail_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Izbacivanje podataka za tablicu `orderdetail`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `package`
+--
+
+DROP TABLE IF EXISTS `package`;
+CREATE TABLE `package` (
+  `parentproduct_id` int(11) NOT NULL,
+  `childproduct_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  PRIMARY KEY  (`parentproduct_id`,`childproduct_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Izbacivanje podataka za tablicu `package`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `price`
+--
+
+DROP TABLE IF EXISTS `price`;
+CREATE TABLE `price` (
+  `price_id` int(11) NOT NULL auto_increment,
+  `product_id` int(11) NOT NULL,
+  `discount_id` int(11) NOT NULL,
+  `price` float NOT NULL,
+  `beginDate` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`price_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Izbacivanje podataka za tablicu `price`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `product`
+--
+
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE `product` (
+  `product_id` int(11) NOT NULL auto_increment,
+  `category_id` int(11) NOT NULL,
+  `manufacturer_id` int(11) NOT NULL,
+  `name` varchar(250) collate utf8_unicode_ci NOT NULL,
+  `descriptionShort` varchar(250) collate utf8_unicode_ci NOT NULL,
+  `descriptionLong` text collate utf8_unicode_ci,
+  `discontinued` tinyint(1) NOT NULL default '0',
+  `quantity` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`product_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Izbacivanje podataka za tablicu `product`
+--
+
+INSERT INTO `product` (`product_id`, `category_id`, `manufacturer_id`, `name`, `descriptionShort`, `descriptionLong`, `discontinued`, `quantity`) VALUES
+(1, 1, 1, 'Opium', 'A controversial fragrance at the time of launch. Opium was almost withdrawn because of the name. A warm oriental fragrance it captured the mood of the time.', NULL, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `productview`
+--
+
+DROP TABLE IF EXISTS `productview`;
+CREATE TABLE `productview` (
+  `productview_id` int(11) NOT NULL auto_increment,
+  `session_id` int(11) NOT NULL,
+  `productviewTime` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `product_id` int(11) NOT NULL,
+  PRIMARY KEY  (`productview_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Izbacivanje podataka za tablicu `productview`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `search`
+--
+
+DROP TABLE IF EXISTS `search`;
+CREATE TABLE `search` (
+  `search_id` int(11) NOT NULL auto_increment,
+  `session_id` int(11) NOT NULL,
+  `query` varchar(250) collate utf8_unicode_ci NOT NULL,
+  `resultCount` int(11) NOT NULL,
+  `resultsPerPage` int(11) NOT NULL,
+  PRIMARY KEY  (`search_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Izbacivanje podataka za tablicu `search`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `searchdetail`
+--
+
+DROP TABLE IF EXISTS `searchdetail`;
+CREATE TABLE `searchdetail` (
+  `searchdetail_id` int(11) NOT NULL auto_increment,
+  `search_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `time` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `resultNumber` int(11) NOT NULL,
+  `clickCount` int(11) NOT NULL,
+  PRIMARY KEY  (`searchdetail_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Izbacivanje podataka za tablicu `searchdetail`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tablična struktura za tablicu `session`
+--
+
+DROP TABLE IF EXISTS `session`;
 CREATE TABLE `session` (
   `session_id` varchar(32) collate utf8_unicode_ci NOT NULL,
   `customer_id` int(11) default NULL,
@@ -210,7 +507,7 @@ CREATE TABLE `session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `session`
+-- Izbacivanje podataka za tablicu `session`
 --
 
 INSERT INTO `session` (`session_id`, `customer_id`) VALUES
@@ -226,9 +523,10 @@ INSERT INTO `session` (`session_id`, `customer_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Tablična struktura za tablicu `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL auto_increment,
   `username` varchar(20) collate utf8_unicode_ci NOT NULL,
@@ -242,24 +540,18 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `user`
+-- Izbacivanje podataka za tablicu `user`
 --
 
 INSERT INTO `user` (`user_id`, `username`, `firstname`, `lastname`, `email`, `password`, `userlevel`, `lastvisited`) VALUES
 (1, 'matej', 'Matej', 'Udovičić', 'matej.udo@gmail.com', '3adbb507cd221a3a438f858057b3017a', 9, '2008-12-04 01:43:43');
 
 --
--- Constraints for dumped tables
+-- Ograničenja za izbačene tablice
 --
 
 --
--- Constraints for table `action`
---
-ALTER TABLE `action`
-  ADD CONSTRAINT `action_ibfk_1` FOREIGN KEY (`session_id`) REFERENCES `session` (`session_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `session`
+-- Ograničenja za tablicu `session`
 --
 ALTER TABLE `session`
   ADD CONSTRAINT `session_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;

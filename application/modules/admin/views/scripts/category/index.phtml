@@ -1,0 +1,45 @@
+<h1>Kategorije</h1>
+
+
+<?php if($this->messages): ?>
+	<div id="messages">
+		<p>
+			<?php foreach($this->messages as $message): ?>
+				<?= $message ?>
+			<?php endforeach; ?>
+		</p>
+	</div>
+<?php endif; ?>
+<form action="<?= $this->baseUrl ?>/admin/category/add" method="post">
+	<p>
+		<label for="catname">Nova kategorija: </label>
+		<input type="text" value="" name="catname" id="catname" />
+
+		Nadkategorija:
+		<select name="parentcat">
+			<option value="-1" selected="selected">Bez nadkategorije</option>
+			<?php foreach($this->catTree as $item): ?>
+				<option value="<?= $item->category_id ?>"><?= $item->name ?></option>
+			<?php endforeach; ?>
+		</select>
+		<input type="submit" calue="Stvori" />
+	</p>
+
+</form>
+<ul class="category">
+	<?php foreach($this->catTree as $item): ?>
+		<li>
+			<strong><?= $item->name ?></strong>
+			<?php if(!$item->children): ?>
+				<a href="<?= $this->baseUrl ?>/admin/category/delete/id/<?= $item->category_id ?>">(Delete)</a>
+			<?php endif; ?>
+		</li>
+		<?php if($item->children): ?>
+			<ul>
+				<?php foreach($item->children as $subitem): ?>
+					<li><?= $subitem->name ?> <a href="<?= $this->baseUrl ?>/admin/category/delete/id/<?= $subitem->category_id ?>">(Delete)</a></li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+	<?php endforeach; ?>
+</ul>
