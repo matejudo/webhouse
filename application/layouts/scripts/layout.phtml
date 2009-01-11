@@ -19,8 +19,12 @@
 		</ul>
 		<input id="searchbox" type="text" value="pretraga..." />
 	</div>
-	<div id="pathbar" class="grid_16">&nbsp;</div>
-	<div id="sidebar" class="grid_4">&nbsp;</div>
+	<div id="pathbar" class="grid_16">
+		<div class="cart"><p>3 artikla (734,43kn) <img src="<?= $this->baseUrl ?>/images/icons/cart_go.png" /></p></div>
+	</div>
+	<div id="sidebar" class="grid_4">
+		<?= $this->layout()->sidebar; ?>
+	</div>
 	<div id="content" class="grid_12">&nbsp;
 		<?= $this->layout()->content; ?>
 	</div>

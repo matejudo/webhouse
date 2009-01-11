@@ -11,8 +11,14 @@ class Category extends Zend_Db_Table
 		else
 			$query = "SELECT * FROM category WHERE parent_id = $id";
 		$result = $this->getAdapter()->fetchAll($query);
+
+		$query = "SELECT category_id, COUNT(*) FROM product GROUP BY 1";
+		$count = $this->getAdapter()->fetchPairs($query);
+		//$count = $this->getAdapter()->fetchAll($query);
+
 		foreach($result as $item)
 		{
+			$item->count = $count[$item->category_id];
 			$item->children = $this->getTree($item->category_id);
 		}
 		return $result;

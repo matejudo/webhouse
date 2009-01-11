@@ -1,0 +1,16 @@
+<h1>Kategorija</h1>
+
+<ul class="list detail">
+	<li class="product header">
+		<span class="name">Artikl</span>
+		<span class="price">Cijena</span>
+		<span class="cart"><a href="#"><img src="<?= $this->baseUrl ?>/images/icons/cart.png" /></a></span>
+	</li>
+	<?php foreach($this->products as $product): ?>
+		<li class="product">
+			<span class="name"><?= $product->productName ?><br/><small><?= $product->manufacturer ?></small></span>
+			<span class="price">n/a kn</span>
+			<span class="cart"><a href="#"><img src="<?= $this->baseUrl ?>/images/icons/cart_add.png" /></a></span>
+		</li>
+	<?php endforeach; ?>
+</ul>

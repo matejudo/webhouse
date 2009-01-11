@@ -18,11 +18,11 @@ body { background: #a1c2dd url(../images/topbg.png) repeat-x; }
 					 color: #767676; width: 140px; height: 16px; padding-right: 20px; font-weight: bold;
 					 background: white url(../images/searchicon.png) center right no-repeat; }
 		#searchbox:focus { border: 2px solid #a2c2dd; }
-	#pathbar { background: #484e54; height: 32px; }
+	#pathbar { background: #484e54; height: 32px; color: #ccc; }
+		#pathbar .cart { width: 200px; float: right; text-align: right; padding-right: 20px; margin-top: 5px; }
+		#pathbar .cart img { vertical-align: middle; }
 	#sidebar { background: white; }
-	#content { background: white;   }
-
-.product { width: 20px; height: 20px; padding: 20px; margin-right: 10px; float:left; border: 1px solid #999999; }
+	#content { background: white; padding-bottom: 20px;  }
 
 .category li { font-size: 14px; margin-bottom: 5px; }
 .category ul li { list-style: circle; margin-left: 20px; }
@@ -30,3 +30,23 @@ body { background: #a1c2dd url(../images/topbg.png) repeat-x; }
 
 #messages { border: 2px solid red; text-align: center; padding: 10px 10px 10px 10px; margin: 0px 40px 20px 0px; }
 #messages p { margin: 0; padding: 0; }
+
+h1 { font-family: "Trebuchet MS"; width: 95%;  }
+
+.list { margin-top: 20px; margin-left: 0px; width: 95%; }
+.detail {  }
+	.detail .header { background: #484e54; color: white; line-height: 1.2em; font-weight: bold; height: 16px; border-top: 1px solid black; border-bottom: 1px solid black;}
+	.detail .product {  height: 20px; border-bottom: 1px solid #a1c2dd; clear: both; padding: 5px 0px 5px 0px; line-height: 0.8em; padding-left: 2%; }
+		.detail .product span { display:block; float: left; }
+		.detail .product .name { width: 80%; }
+		.detail .header .name { line-height: 1.5em; }
+		.detail .product .price { width: 10%; text-align: center;  line-height: 1.5em;}
+		.detail .product .cart { width: 8%; text-align: right; margin-right: 2%; color: #999; line-height: 1.5em;}
+		.detail .product small { color: #a1c2dd; font-size: 0.8em; }
+
+.categories { margin-left: 10px; margin-top: 20px; }
+	.categories li { font-weight: bold; }
+	.categories ul { margin: 0 0 10px 10px; }
+		.categories ul li { font-weight: normal; font-size: 0.9em; }
+
+

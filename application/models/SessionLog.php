@@ -8,6 +8,7 @@ class SessionLog extends Zend_Db_Table
 	{
 		$this->session_id = Zend_Session::getId();
 		parent::__construct();
+		$this->createSession();
 	}
 	
 	public function exists()
@@ -43,6 +44,15 @@ class SessionLog extends Zend_Db_Table
 			"info" => $info
 		);
 		$this->getAdapter()->insert("action", $data);
+	}
+
+	public function logCategory($category_id)
+	{
+		$data = array(
+			"session_id" => $this->session_id,
+			"category_id" => $category_id
+		);
+		$this->getAdapter()->insert("categoryview", $data);
 	}
 	
 	public function getActions()

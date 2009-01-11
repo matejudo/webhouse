@@ -1,0 +1,26 @@
+<ul class="categories">
+<?php
+	$category = new Category();
+	$categories = $category->getTree();
+	foreach($categories as $item)
+	{
+		echo "<li>";
+			if($item->count > 0) echo "<a href='$this->baseUrl/product/category/id/$item->category_id'>";
+			echo $item->categoryName ;
+			if($item->count > 0) echo "</a>";
+			if($item->count > 0) echo " ($item->count)";
+		echo "</li>";
+		if($item->children)
+		{
+			echo "<ul>";
+			foreach($item->children as $subitem)
+			{
+				echo "<li><a href='$this->baseUrl/product/category/id/$subitem->category_id'>" . $subitem->categoryName . "</a>";
+				if($subitem->count > 0) echo " ($subitem->count)";
+				echo "</li>";
+			}
+			echo "</ul>";
+		}
+	}
+?>
+</ul>
