@@ -24,6 +24,11 @@ class Category extends Zend_Db_Table
 		return $result;
 	}
 
+	public function getById($category_id)
+	{
+		return $this->fetchRow("category_id = $category_id");
+	}
+
 	public function add($name, $parent = NULL)
 	{
 		if($parent === NULL) $parent = "NULL";

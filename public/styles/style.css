@@ -5,13 +5,13 @@ ul, ol, dl, p { margin-bottom: 1.5em; }
 ul, ol, dl { margin-bottom: 1.8em; }
 p { margin-bottom: 1.5em; }
 
-body { background: #a1c2dd url(../images/topbg.png) repeat-x; }
+body { background: #e6ceac url(../images/topbg.jpg) no-repeat top center; }
 
 #header { height: 120px; }
 
 #wrapper { background: url(../images/mainbg.png) repeat-y;  top: 120px; }
 	#menubar { background: url(../images/menubg.png) no-repeat; height: 33px; padding-top: 10px; overflow: hidden; }
-		#menu { font-weight: bold; text-transform: uppercase; width: 600px; margin-left: 20px; margin-top: 10px; width: 600px; float: left; }
+		#menu { font-weight: bold; text-transform: uppercase; width: 600px; margin-left: 20px; margin-top: 7px; width: 600px; float: left; }
 			#menu li { display: inline; list-style: none; margin-left: 20px;  }
 			#menu a { color: white; text-decoration: none; font-size: 0.8em; }
 		#searchbox { border: 2px solid #767676; background: white; float:right; margin: 5px 20px 0px 0px; 
@@ -19,8 +19,9 @@ body { background: #a1c2dd url(../images/topbg.png) repeat-x; }
 					 background: white url(../images/searchicon.png) center right no-repeat; }
 		#searchbox:focus { border: 2px solid #a2c2dd; }
 	#pathbar { background: #484e54; height: 32px; color: #ccc; }
+		#pathbar a { color: white; text-decoration: none; }
 		#pathbar .cart { width: 200px; float: right; text-align: right; padding-right: 20px; margin-top: 5px; }
-		#pathbar .cart img { vertical-align: middle; }
+			#pathbar .cart img { vertical-align: middle; }
 	#sidebar { background: white; }
 	#content { background: white; padding-bottom: 20px;  }
 
@@ -33,6 +34,9 @@ body { background: #a1c2dd url(../images/topbg.png) repeat-x; }
 
 h1 { font-family: "Trebuchet MS"; width: 95%;  }
 
+.button { text-align: center; border: 1px solid #a1c2dd; padding: 3px; }
+	.button { color: black; text-decoration: none; }
+
 .list { margin-top: 20px; margin-left: 0px; width: 95%; }
 .detail {  }
 	.detail .header { background: #484e54; color: white; line-height: 1.2em; font-weight: bold; height: 16px; border-top: 1px solid black; border-bottom: 1px solid black;}
@@ -40,9 +44,26 @@ h1 { font-family: "Trebuchet MS"; width: 95%;  }
 		.detail .product span { display:block; float: left; }
 		.detail .product .name { width: 80%; }
 		.detail .header .name { line-height: 1.5em; }
-		.detail .product .price { width: 10%; text-align: center;  line-height: 1.5em;}
+		.detail .product .price { width: 10%; text-align: right;  line-height: 1.5em;}
 		.detail .product .cart { width: 8%; text-align: right; margin-right: 2%; color: #999; line-height: 1.5em;}
 		.detail .product small { color: #a1c2dd; font-size: 0.8em; }
+
+.cart {  }
+	.cart .header { background: #484e54; color: white; line-height: 1.2em; font-weight: bold; height: 16px; border-top: 1px solid black; border-bottom: 1px solid black;}
+	.cart .product {  height: 20px; border-bottom: 1px solid #a1c2dd; clear: both; padding: 5px 0px 5px 0px; line-height: 0.8em; padding-left: 2%; }
+		.cart .product span { display:block; float: left; }
+		.cart .product .name { width: 68%; }
+		.cart .header .name { line-height: 1.5em; }
+		.cart .product .price { width: 8%; text-align: right;  line-height: 1.5em;}
+		.cart .product .amount { width: 12%; text-align: center; line-height: 1.5em;}
+			.cart .product .amount input { width: 40px; text-align: center; border: 1px solid #a1c2dd; }
+		.cart .product .total { width: 11%; text-align: right;  line-height: 1.5em;}
+		.cart .product small { color: #a1c2dd; font-size: 0.8em; }
+	.cart .totalrow { margin-top: 2px; border-top: 1px solid #a1c2dd; font-weight: bold; background: #eee;}
+	.cart .totalrow .name { line-height: 1.5em; }
+	.cart .totalrow .recalc { width: 20%; text-align: center; line-height: 1.5em; }
+		.cart .totalrow .recalc input { text-align: center; border: 1px solid #a1c2dd; background: white; cursor: pointer; }
+
 
 .categories { margin-left: 10px; margin-top: 20px; }
 	.categories li { font-weight: bold; }

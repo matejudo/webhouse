@@ -1,0 +1,29 @@
+<h1>Vaša košarica</h1>
+
+<form method="post" action="<?= $this->baseUrl; ?>/cart/set/">
+	<ul class="list cart">
+		<li class="product header">
+			<span class="name">Artikl</span>
+			<span class="price">Cijena</span>
+			<span class="amount">Količina</span>
+			<span class="total">Ukupno</span>
+		</li>
+		<?php $total = 0; ?>
+		<?php foreach($this->products as $product): ?>
+			<?php if($product->amount == 0) continue; ?>
+			<li class="product">
+				<span class="name"><?= $product->productName ?><br/><small><?= $product->manufacturer ?></small></span>
+				<span class="price"><?= number_format($product->price, 2, ",", ".") ?></span>
+				<span class="amount"><input type="text" name="amount[<?= $product->product_id ?>]" value="<?= $product->amount ?>" /></span>
+				<span class="total"><?= number_format($product->total, 2, ",", ".") ?></span>
+			</li>
+			<?php $total += $product->total; ?>
+		<?php endforeach; ?>
+		<li class="product totalrow">
+			<span class="name">Ukupno</span>
+			<span class="recalc"><input type="submit" value="Izračunaj promjene" /></span>
+			<span class="total"><?= number_format($total, 2, ",", ".") ?></span>
+		</li>
+	</ul>
+</form>
+<p style="text-align: right; width: 93%; "><a href="<?= $this->baseUrl; ?>/cart/buy" class="button">Narudžba &raquo;</a></p>

@@ -17,6 +17,11 @@ class SessionLog extends Zend_Db_Table
 			return false;
 		return true;
 	}
+
+	public function getId()
+	{
+		return Zend_Session::getId();
+	}
 	
 	/**
 	 * Creates a new session in the database for the current session id 

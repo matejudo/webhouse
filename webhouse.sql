@@ -1,31 +1,25 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.9.2
+-- version 2.11.3
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jan 11, 2009 at 11:38 AM
--- Server version: 5.0.67
--- PHP Version: 5.2.6
+-- Računalo: localhost
+-- Vrijeme generiranja: Sij 12, 2009 u 02:45 AM
+-- Verzija poslužitelja: 5.0.51
+-- PHP verzija: 5.2.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- Database: `webhouse`
+-- Baza podataka: `webhouse`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `address`
+-- Tablična struktura za tablicu `address`
 --
 
-CREATE TABLE IF NOT EXISTS `address` (
+CREATE TABLE `address` (
   `address_id` int(11) NOT NULL auto_increment,
   `customer_id` int(11) NOT NULL,
   `addressStreet` varchar(250) collate utf8_unicode_ci NOT NULL,
@@ -36,17 +30,17 @@ CREATE TABLE IF NOT EXISTS `address` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `address`
+-- Izbacivanje podataka za tablicu `address`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `attribute`
+-- Tablična struktura za tablicu `attribute`
 --
 
-CREATE TABLE IF NOT EXISTS `attribute` (
+CREATE TABLE `attribute` (
   `product_id` int(11) NOT NULL,
   `attributetype_id` int(11) NOT NULL,
   `attributeValue` varchar(50) collate utf8_unicode_ci NOT NULL,
@@ -54,34 +48,34 @@ CREATE TABLE IF NOT EXISTS `attribute` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `attribute`
+-- Izbacivanje podataka za tablicu `attribute`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `attributetype`
+-- Tablična struktura za tablicu `attributetype`
 --
 
-CREATE TABLE IF NOT EXISTS `attributetype` (
+CREATE TABLE `attributetype` (
   `attributetype_id` int(11) NOT NULL auto_increment,
   `attributetypeName` varchar(50) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`attributetype_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `attributetype`
+-- Izbacivanje podataka za tablicu `attributetype`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Tablična struktura za tablicu `category`
 --
 
-CREATE TABLE IF NOT EXISTS `category` (
+CREATE TABLE `category` (
   `category_id` int(11) NOT NULL auto_increment,
   `parent_id` int(11) default NULL,
   `categoryName` varchar(250) collate utf8_unicode_ci NOT NULL,
@@ -92,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `category` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1319 ;
 
 --
--- Dumping data for table `category`
+-- Izbacivanje podataka za tablicu `category`
 --
 
 INSERT INTO `category` (`category_id`, `parent_id`, `categoryName`, `categoryOrdering`, `categoryDescription`, `categoryThumbnail`) VALUES
@@ -150,33 +144,29 @@ INSERT INTO `category` (`category_id`, `parent_id`, `categoryName`, `categoryOrd
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categoryview`
+-- Tablična struktura za tablicu `categoryview`
 --
 
-CREATE TABLE IF NOT EXISTS `categoryview` (
+CREATE TABLE `categoryview` (
   `categoryview_id` int(11) NOT NULL auto_increment,
   `session_id` int(11) NOT NULL,
   `categoryviewTime` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `category_id` int(11) NOT NULL,
   PRIMARY KEY  (`categoryview_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `categoryview`
+-- Izbacivanje podataka za tablicu `categoryview`
 --
 
-INSERT INTO `categoryview` (`categoryview_id`, `session_id`, `categoryviewTime`, `category_id`) VALUES
-(1, 805, '2009-01-11 11:20:26', 1281),
-(2, 805, '2009-01-11 11:20:27', 1280),
-(3, 805, '2009-01-11 11:20:28', 1279);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `city`
+-- Tablična struktura za tablicu `city`
 --
 
-CREATE TABLE IF NOT EXISTS `city` (
+CREATE TABLE `city` (
   `zipCode` varchar(5) collate utf8_unicode_ci NOT NULL,
   `countryCode` varchar(2) collate utf8_unicode_ci NOT NULL,
   `cityName` varchar(50) collate utf8_unicode_ci NOT NULL,
@@ -184,34 +174,34 @@ CREATE TABLE IF NOT EXISTS `city` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `city`
+-- Izbacivanje podataka za tablicu `city`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `country`
+-- Tablična struktura za tablicu `country`
 --
 
-CREATE TABLE IF NOT EXISTS `country` (
+CREATE TABLE `country` (
   `countryCode` varchar(2) collate utf8_unicode_ci NOT NULL,
   `countryName` varchar(50) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`countryCode`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `country`
+-- Izbacivanje podataka za tablicu `country`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Tablična struktura za tablicu `customer`
 --
 
-CREATE TABLE IF NOT EXISTS `customer` (
+CREATE TABLE `customer` (
   `customer_id` int(11) NOT NULL auto_increment,
   `customerFirstname` varchar(50) collate utf8_unicode_ci NOT NULL,
   `customerLastname` varchar(50) collate utf8_unicode_ci NOT NULL,
@@ -225,17 +215,17 @@ CREATE TABLE IF NOT EXISTS `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `customer`
+-- Izbacivanje podataka za tablicu `customer`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `discount`
+-- Tablična struktura za tablicu `discount`
 --
 
-CREATE TABLE IF NOT EXISTS `discount` (
+CREATE TABLE `discount` (
   `discount_id` int(11) NOT NULL auto_increment,
   `discountTitle` varchar(250) collate utf8_unicode_ci NOT NULL,
   `discountDescription` text collate utf8_unicode_ci NOT NULL,
@@ -246,17 +236,17 @@ CREATE TABLE IF NOT EXISTS `discount` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `discount`
+-- Izbacivanje podataka za tablicu `discount`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `file`
+-- Tablična struktura za tablicu `file`
 --
 
-CREATE TABLE IF NOT EXISTS `file` (
+CREATE TABLE `file` (
   `file_id` int(11) NOT NULL auto_increment,
   `product_id` int(11) NOT NULL,
   `fileName` varchar(250) collate utf8_unicode_ci NOT NULL,
@@ -264,17 +254,17 @@ CREATE TABLE IF NOT EXISTS `file` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `file`
+-- Izbacivanje podataka za tablicu `file`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `manufacturer`
+-- Tablična struktura za tablicu `manufacturer`
 --
 
-CREATE TABLE IF NOT EXISTS `manufacturer` (
+CREATE TABLE `manufacturer` (
   `manufacturer_id` int(11) NOT NULL auto_increment,
   `manufacturerName` varchar(50) collate utf8_unicode_ci NOT NULL,
   `manufacturerStreet` varchar(250) collate utf8_unicode_ci default NULL,
@@ -289,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `manufacturer` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=268 ;
 
 --
--- Dumping data for table `manufacturer`
+-- Izbacivanje podataka za tablicu `manufacturer`
 --
 
 INSERT INTO `manufacturer` (`manufacturer_id`, `manufacturerName`, `manufacturerStreet`, `zipCode`, `countryCode`, `manufacturerContactPerson`, `manufacturerEmail`, `manufacturerPhone`, `manufacturerFax`, `manufacturerMobile`) VALUES
@@ -315,10 +305,10 @@ INSERT INTO `manufacturer` (`manufacturer_id`, `manufacturerName`, `manufacturer
 -- --------------------------------------------------------
 
 --
--- Table structure for table `offer`
+-- Tablična struktura za tablicu `offer`
 --
 
-CREATE TABLE IF NOT EXISTS `offer` (
+CREATE TABLE `offer` (
   `offer_id` int(11) NOT NULL auto_increment,
   `offerName` varchar(250) collate utf8_unicode_ci NOT NULL,
   `offerDescription` text collate utf8_unicode_ci NOT NULL,
@@ -328,17 +318,17 @@ CREATE TABLE IF NOT EXISTS `offer` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `offer`
+-- Izbacivanje podataka za tablicu `offer`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `offerdetail`
+-- Tablična struktura za tablicu `offerdetail`
 --
 
-CREATE TABLE IF NOT EXISTS `offerdetail` (
+CREATE TABLE `offerdetail` (
   `offerdetail_id` int(11) NOT NULL auto_increment,
   `offer_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -347,36 +337,36 @@ CREATE TABLE IF NOT EXISTS `offerdetail` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `offerdetail`
+-- Izbacivanje podataka za tablicu `offerdetail`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order`
+-- Tablična struktura za tablicu `order`
 --
 
-CREATE TABLE IF NOT EXISTS `order` (
+CREATE TABLE `order` (
   `order_id` int(11) NOT NULL auto_increment,
-  `session_id` int(11) NOT NULL,
-  `orderShippingaddress_id` int(11) NOT NULL,
-  `discount_id` int(11) NOT NULL,
+  `session_id` varchar(32) collate utf8_unicode_ci NOT NULL,
+  `orderShippingaddress_id` int(11) default NULL,
+  `discount_id` int(11) default NULL,
   PRIMARY KEY  (`order_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `order`
+-- Izbacivanje podataka za tablicu `order`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orderdetail`
+-- Tablična struktura za tablicu `orderdetail`
 --
 
-CREATE TABLE IF NOT EXISTS `orderdetail` (
+CREATE TABLE `orderdetail` (
   `orderdetail_id` int(11) NOT NULL auto_increment,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -386,17 +376,17 @@ CREATE TABLE IF NOT EXISTS `orderdetail` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `orderdetail`
+-- Izbacivanje podataka za tablicu `orderdetail`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `package`
+-- Tablična struktura za tablicu `package`
 --
 
-CREATE TABLE IF NOT EXISTS `package` (
+CREATE TABLE `package` (
   `parentproduct_id` int(11) NOT NULL,
   `childproduct_id` int(11) NOT NULL,
   `packageAmount` int(11) NOT NULL,
@@ -404,37 +394,155 @@ CREATE TABLE IF NOT EXISTS `package` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `package`
+-- Izbacivanje podataka za tablicu `package`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `price`
+-- Tablična struktura za tablicu `price`
 --
 
-CREATE TABLE IF NOT EXISTS `price` (
+CREATE TABLE `price` (
   `price_id` int(11) NOT NULL auto_increment,
   `product_id` int(11) NOT NULL,
-  `discount_id` int(11) NOT NULL,
+  `discount_id` int(11) default NULL,
   `price` float NOT NULL,
   `priceTime` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`price_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=118 ;
 
 --
--- Dumping data for table `price`
+-- Izbacivanje podataka za tablicu `price`
 --
 
+INSERT INTO `price` (`price_id`, `product_id`, `discount_id`, `price`, `priceTime`) VALUES
+(1, 1316, NULL, 213.21, '2009-01-11 19:18:30'),
+(2, 1316, NULL, 1000, '2009-01-11 19:31:10'),
+(3, 1320, NULL, 233.12, '2009-01-11 19:29:47'),
+(4, 1316, NULL, 23.15, '2009-01-11 19:30:04'),
+(5, 1320, NULL, 10, '2009-01-11 19:30:43'),
+(6, 1316, NULL, 433, '2009-01-11 19:30:55'),
+(7, 1316, NULL, 130.16, '2009-01-11 23:59:58'),
+(8, 1317, NULL, 371.71, '2009-01-11 23:59:58'),
+(9, 1318, NULL, 284.05, '2009-01-11 23:59:58'),
+(10, 1319, NULL, 341.14, '2009-01-11 23:59:58'),
+(11, 1320, NULL, 341.04, '2009-01-11 23:59:58'),
+(12, 1321, NULL, 211.03, '2009-01-11 23:59:58'),
+(13, 1322, NULL, 461.1, '2009-01-11 23:59:58'),
+(14, 1323, NULL, 317.13, '2009-01-11 23:59:58'),
+(15, 1324, NULL, 340.11, '2009-01-11 23:59:58'),
+(16, 1325, NULL, 362.37, '2009-01-11 23:59:58'),
+(17, 1326, NULL, 447.42, '2009-01-11 23:59:58'),
+(18, 1327, NULL, 204.36, '2009-01-11 23:59:58'),
+(19, 1328, NULL, 113.29, '2009-01-11 23:59:58'),
+(20, 1329, NULL, 192.9, '2009-01-11 23:59:58'),
+(21, 1330, NULL, 116.45, '2009-01-11 23:59:58'),
+(22, 1331, NULL, 157.5, '2009-01-11 23:59:58'),
+(23, 1332, NULL, 321.54, '2009-01-11 23:59:58'),
+(24, 1333, NULL, 194.83, '2009-01-11 23:59:58'),
+(25, 1334, NULL, 466.65, '2009-01-11 23:59:58'),
+(26, 1335, NULL, 106.25, '2009-01-11 23:59:58'),
+(27, 1336, NULL, 50.78, '2009-01-11 23:59:58'),
+(28, 1337, NULL, 185.32, '2009-01-11 23:59:58'),
+(29, 1338, NULL, 471.43, '2009-01-11 23:59:58'),
+(30, 1339, NULL, 205.29, '2009-01-11 23:59:58'),
+(31, 1340, NULL, 411.96, '2009-01-11 23:59:58'),
+(32, 1341, NULL, 206.58, '2009-01-11 23:59:58'),
+(33, 1342, NULL, 229.23, '2009-01-11 23:59:58'),
+(34, 1343, NULL, 384.32, '2009-01-11 23:59:58'),
+(35, 1344, NULL, 491.01, '2009-01-11 23:59:58'),
+(36, 1345, NULL, 75.79, '2009-01-11 23:59:58'),
+(37, 1346, NULL, 63.49, '2009-01-11 23:59:58'),
+(38, 1347, NULL, 348.01, '2009-01-11 23:59:58'),
+(39, 1348, NULL, 498.87, '2009-01-11 23:59:58'),
+(40, 1349, NULL, 285.14, '2009-01-11 23:59:58'),
+(41, 1350, NULL, 72.67, '2009-01-11 23:59:58'),
+(42, 1351, NULL, 476.05, '2009-01-11 23:59:58'),
+(43, 1352, NULL, 421.46, '2009-01-11 23:59:58'),
+(44, 1353, NULL, 201.8, '2009-01-11 23:59:58'),
+(45, 1354, NULL, 130.18, '2009-01-11 23:59:58'),
+(46, 1355, NULL, 473.14, '2009-01-11 23:59:58'),
+(47, 1356, NULL, 469.75, '2009-01-11 23:59:58'),
+(48, 1357, NULL, 317.98, '2009-01-11 23:59:58'),
+(49, 1358, NULL, 334.48, '2009-01-11 23:59:58'),
+(50, 1359, NULL, 268.96, '2009-01-11 23:59:58'),
+(51, 1360, NULL, 179.65, '2009-01-11 23:59:58'),
+(52, 1361, NULL, 450.87, '2009-01-11 23:59:58'),
+(53, 1362, NULL, 108.98, '2009-01-11 23:59:58'),
+(54, 1363, NULL, 468.2, '2009-01-11 23:59:58'),
+(55, 1364, NULL, 212.12, '2009-01-11 23:59:58'),
+(56, 1365, NULL, 192.63, '2009-01-11 23:59:58'),
+(57, 1366, NULL, 452.14, '2009-01-11 23:59:58'),
+(58, 1367, NULL, 100.53, '2009-01-11 23:59:58'),
+(59, 1368, NULL, 103.07, '2009-01-11 23:59:58'),
+(60, 1369, NULL, 260.47, '2009-01-11 23:59:58'),
+(61, 1370, NULL, 337.39, '2009-01-11 23:59:58'),
+(62, 1371, NULL, 220.67, '2009-01-11 23:59:58'),
+(63, 1372, NULL, 63.47, '2009-01-11 23:59:58'),
+(64, 1373, NULL, 246.57, '2009-01-11 23:59:58'),
+(65, 1374, NULL, 313.16, '2009-01-11 23:59:58'),
+(66, 1375, NULL, 308.29, '2009-01-11 23:59:58'),
+(67, 1376, NULL, 79.23, '2009-01-11 23:59:58'),
+(68, 1377, NULL, 418.13, '2009-01-11 23:59:58'),
+(69, 1378, NULL, 252.9, '2009-01-11 23:59:58'),
+(70, 1379, NULL, 68.07, '2009-01-11 23:59:58'),
+(71, 1380, NULL, 361.31, '2009-01-11 23:59:58'),
+(72, 1381, NULL, 367.31, '2009-01-11 23:59:58'),
+(73, 1382, NULL, 255.05, '2009-01-11 23:59:58'),
+(74, 1383, NULL, 329.71, '2009-01-11 23:59:58'),
+(75, 1384, NULL, 445.64, '2009-01-11 23:59:58'),
+(76, 1385, NULL, 361.33, '2009-01-11 23:59:58'),
+(77, 1386, NULL, 193.03, '2009-01-11 23:59:58'),
+(78, 1387, NULL, 347.9, '2009-01-11 23:59:58'),
+(79, 1388, NULL, 93.13, '2009-01-11 23:59:58'),
+(80, 1389, NULL, 442.35, '2009-01-11 23:59:58'),
+(81, 1390, NULL, 165.29, '2009-01-11 23:59:58'),
+(82, 1391, NULL, 52.3, '2009-01-11 23:59:58'),
+(83, 1392, NULL, 189.76, '2009-01-11 23:59:58'),
+(84, 1393, NULL, 427.58, '2009-01-11 23:59:58'),
+(85, 1394, NULL, 495.27, '2009-01-11 23:59:58'),
+(86, 1395, NULL, 497.64, '2009-01-11 23:59:58'),
+(87, 1396, NULL, 496.45, '2009-01-11 23:59:58'),
+(88, 1397, NULL, 359.18, '2009-01-11 23:59:58'),
+(89, 1398, NULL, 381.39, '2009-01-11 23:59:58'),
+(90, 1399, NULL, 263.57, '2009-01-11 23:59:58'),
+(91, 1400, NULL, 99.12, '2009-01-11 23:59:58'),
+(92, 1401, NULL, 54.36, '2009-01-11 23:59:58'),
+(93, 1402, NULL, 147.1, '2009-01-11 23:59:58'),
+(94, 1403, NULL, 404.81, '2009-01-11 23:59:58'),
+(95, 1404, NULL, 108.73, '2009-01-11 23:59:58'),
+(96, 1405, NULL, 455.32, '2009-01-11 23:59:58'),
+(97, 1406, NULL, 340.85, '2009-01-11 23:59:58'),
+(98, 1407, NULL, 401.02, '2009-01-11 23:59:58'),
+(99, 1408, NULL, 61.22, '2009-01-11 23:59:58'),
+(100, 1409, NULL, 479.21, '2009-01-11 23:59:58'),
+(101, 1410, NULL, 386.06, '2009-01-11 23:59:58'),
+(102, 1411, NULL, 406.89, '2009-01-11 23:59:58'),
+(103, 1412, NULL, 167.51, '2009-01-11 23:59:58'),
+(104, 1413, NULL, 168.24, '2009-01-11 23:59:58'),
+(105, 1414, NULL, 381.17, '2009-01-11 23:59:58'),
+(106, 1415, NULL, 352.13, '2009-01-11 23:59:58'),
+(107, 1416, NULL, 413.55, '2009-01-11 23:59:58'),
+(108, 1417, NULL, 239.6, '2009-01-11 23:59:58'),
+(109, 1418, NULL, 199.62, '2009-01-11 23:59:58'),
+(110, 1419, NULL, 391.4, '2009-01-11 23:59:58'),
+(111, 1420, NULL, 110.27, '2009-01-11 23:59:58'),
+(112, 1421, NULL, 285.46, '2009-01-11 23:59:58'),
+(113, 1422, NULL, 389.85, '2009-01-11 23:59:58'),
+(114, 1423, NULL, 454.41, '2009-01-11 23:59:58'),
+(115, 1424, NULL, 143.61, '2009-01-11 23:59:58'),
+(116, 1425, NULL, 123.03, '2009-01-11 23:59:58'),
+(117, 1426, NULL, 375.29, '2009-01-11 23:59:58');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Tablična struktura za tablicu `product`
 --
 
-CREATE TABLE IF NOT EXISTS `product` (
+CREATE TABLE `product` (
   `product_id` int(11) NOT NULL auto_increment,
   `category_id` int(11) NOT NULL,
   `manufacturer_id` int(11) NOT NULL,
@@ -447,7 +555,7 @@ CREATE TABLE IF NOT EXISTS `product` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1427 ;
 
 --
--- Dumping data for table `product`
+-- Izbacivanje podataka za tablicu `product`
 --
 
 INSERT INTO `product` (`product_id`, `category_id`, `manufacturer_id`, `productName`, `productDescriptionShort`, `productDescriptionLong`, `productDiscontinued`, `productQuantity`) VALUES
@@ -566,10 +674,10 @@ INSERT INTO `product` (`product_id`, `category_id`, `manufacturer_id`, `productN
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productview`
+-- Tablična struktura za tablicu `productview`
 --
 
-CREATE TABLE IF NOT EXISTS `productview` (
+CREATE TABLE `productview` (
   `productview_id` int(11) NOT NULL auto_increment,
   `session_id` int(11) NOT NULL,
   `productviewTime` timestamp NOT NULL default CURRENT_TIMESTAMP,
@@ -578,17 +686,17 @@ CREATE TABLE IF NOT EXISTS `productview` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `productview`
+-- Izbacivanje podataka za tablicu `productview`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `search`
+-- Tablična struktura za tablicu `search`
 --
 
-CREATE TABLE IF NOT EXISTS `search` (
+CREATE TABLE `search` (
   `search_id` int(11) NOT NULL auto_increment,
   `session_id` int(11) NOT NULL,
   `searchQuery` varchar(250) collate utf8_unicode_ci NOT NULL,
@@ -598,17 +706,17 @@ CREATE TABLE IF NOT EXISTS `search` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `search`
+-- Izbacivanje podataka za tablicu `search`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `searchdetail`
+-- Tablična struktura za tablicu `searchdetail`
 --
 
-CREATE TABLE IF NOT EXISTS `searchdetail` (
+CREATE TABLE `searchdetail` (
   `searchdetail_id` int(11) NOT NULL auto_increment,
   `search_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -619,17 +727,17 @@ CREATE TABLE IF NOT EXISTS `searchdetail` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `searchdetail`
+-- Izbacivanje podataka za tablicu `searchdetail`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `session`
+-- Tablična struktura za tablicu `session`
 --
 
-CREATE TABLE IF NOT EXISTS `session` (
+CREATE TABLE `session` (
   `session_id` varchar(32) collate utf8_unicode_ci NOT NULL,
   `customer_id` int(11) default NULL,
   PRIMARY KEY  (`session_id`),
@@ -637,19 +745,16 @@ CREATE TABLE IF NOT EXISTS `session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `session`
+-- Izbacivanje podataka za tablicu `session`
 --
 
-INSERT INTO `session` (`session_id`, `customer_id`) VALUES
-('7d79abdc50100cb4e2e417e7f0e6cd59', NULL),
-('805c408e9fc8cb4dd3f2da5b84fe0772', NULL);
 
 --
--- Constraints for dumped tables
+-- Ograničenja za izbačene tablice
 --
 
 --
--- Constraints for table `session`
+-- Ograničenja za tablicu `session`
 --
 ALTER TABLE `session`
   ADD CONSTRAINT `session_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;

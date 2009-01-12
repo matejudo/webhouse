@@ -1,4 +1,4 @@
-<h1>Kategorija</h1>
+<h1><?= $this->category->categoryName ?></h1>
 
 <ul class="list detail">
 	<li class="product header">
@@ -9,8 +9,8 @@
 	<?php foreach($this->products as $product): ?>
 		<li class="product">
 			<span class="name"><?= $product->productName ?><br/><small><?= $product->manufacturer ?></small></span>
-			<span class="price">n/a kn</span>
-			<span class="cart"><a href="#"><img src="<?= $this->baseUrl ?>/images/icons/cart_add.png" /></a></span>
+			<span class="price"><?= number_format($product->price, 2, ",", ".") ?></span>
+			<span class="cart"><a href="<?= $this->baseUrl ?>/cart/add/id/<?= $product->product_id ?>"><img src="<?= $this->baseUrl ?>/images/icons/cart_add.png" /></a></span>
 		</li>
 	<?php endforeach; ?>
 </ul>
