@@ -59,4 +59,20 @@ class CartController extends Zend_Controller_Action
 		}
 		$this->_redirect("/cart");
 	}
+
+    function buyAction()
+    {
+        $customer = new Customer();
+        $this->view->addresses = $customer->getAddresses();
+    }
+
+    function buy2Action()
+    {
+        $cart = new Cart();
+        $address_id = $this->_getParam("address_id", NULL);
+        $cart->setAddress($address_id);
+        $cart->finishUp();
+        $this->session->logout();
+        $this->_helper->layout->setLayout('empty');
+    }
 }

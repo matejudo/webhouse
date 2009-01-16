@@ -1,0 +1,43 @@
+<h1>Login</h1>
+<p>&nbsp;</p>
+
+<form method="post" action="<?= $this->baseUrl ?>/auth/login">
+    <p>
+        Kupac:
+        <select name="customer_id">
+            <?php foreach($this->customers as $customer): ?>
+                <option value="<?= $customer->customer_id ?>"><?= $customer->customerLastname . ", " .  $customer->customerFirstname . " (" . $customer->orderCount . ")" ?></option>
+            <?php endforeach; ?>
+        </select>
+        <br/>(U zagradi je vidljiv broj obavljenih transakcija)
+    </p>
+    <p>
+        Datum:
+        <select name="year">
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+        </select>
+        <select name="month">
+            <?php $months = array(1=>"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"); ?>
+            <?php for($i=1; $i<13; $i++): ?>
+                <option value="<?= $i ?>"><?= $months[$i] ?></option>
+            <?php endfor; ?>
+        </select>
+        <select name="day">
+            <?php for($i=1; $i<32; $i++): ?>
+                <option value="<?= $i ?>"><?= str_repeat("0",(2 + -1 - floor(log10($i)))) . $i  ?></option>
+            <?php endfor; ?>
+        </select>
+        Sat:
+        <select name="hour">
+            <?php for($i="00"; $i<24; $i++): ?>
+                <option value="<?= $i ?>"> <?= str_repeat("0",(2 + -1 - floor(log10($i)))) . $i ?> </option>
+            <?php endfor; ?>
+        </select>
+        <br/>(Unos vremena posjeta. Minute i sekunde odgovaraju stvarnom vremenu)
+    </p>
+    <p>
+        <input type="submit" value="Log in" />
+    </p>
+</form>
+

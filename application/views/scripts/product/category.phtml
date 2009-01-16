@@ -8,9 +8,11 @@
 	</li>
 	<?php foreach($this->products as $product): ?>
 		<li class="product">
-			<span class="name"><?= $product->productName ?><br/><small><?= $product->manufacturer ?></small></span>
-			<span class="price"><?= number_format($product->price, 2, ",", ".") ?></span>
-			<span class="cart"><a href="<?= $this->baseUrl ?>/cart/add/id/<?= $product->product_id ?>"><img src="<?= $this->baseUrl ?>/images/icons/cart_add.png" /></a></span>
+            <a href="<?= $this->baseUrl ?>/product/view/id/<?= $product->product_id ?>">
+                <span class="name"><?= $product->productName ?><br/><small><?= $product->manufacturer ?></small></span>
+                <span class="price<?php if($product->price->discount) echo " discount"; ?>"><strong><?= number_format($product->price->finalPrice, 2, ",", ".") ?></strong></span>
+                <span class="cart"><a href="<?= $this->baseUrl ?>/cart/add/id/<?= $product->product_id ?>"><img src="<?= $this->baseUrl ?>/images/icons/cart_add.png" /></a></span>
+            </a>
 		</li>
 	<?php endforeach; ?>
 </ul>

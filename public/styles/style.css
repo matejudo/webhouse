@@ -20,7 +20,8 @@ body { background: #e6ceac url(../images/topbg.jpg) no-repeat top center; }
 		#searchbox:focus { border: 2px solid #a2c2dd; }
 	#pathbar { background: #484e54; height: 32px; color: #ccc; }
 		#pathbar a { color: white; text-decoration: none; }
-		#pathbar .cart { width: 200px; float: right; text-align: right; padding-right: 20px; margin-top: 5px; }
+        #pathbar .info { width: 200px; float: left; padding-left: 20px; margin-top: 5px; }
+		#pathbar .cart { width: 500px; float: right; text-align: right; padding-right: 20px; margin-top: 5px; }
 			#pathbar .cart img { vertical-align: middle; }
 	#sidebar { background: white; }
 	#content { background: white; padding-bottom: 20px;  }
@@ -39,8 +40,12 @@ h1 { font-family: "Trebuchet MS"; width: 95%;  }
 
 .list { margin-top: 20px; margin-left: 0px; width: 95%; }
 .detail {  }
+    .detail a { color: inherit; text-decoration: none; display: block; }
+    .detail a:hover { background: #eee; }
 	.detail .header { background: #484e54; color: white; line-height: 1.2em; font-weight: bold; height: 16px; border-top: 1px solid black; border-bottom: 1px solid black;}
+    .detail .header:hover { background: #484e54 !important; color: white;  }
 	.detail .product {  height: 20px; border-bottom: 1px solid #a1c2dd; clear: both; padding: 5px 0px 5px 0px; line-height: 0.8em; padding-left: 2%; }
+    .detail .product:hover { background: #eee; }
 		.detail .product span { display:block; float: left; }
 		.detail .product .name { width: 80%; }
 		.detail .header .name { line-height: 1.5em; }
@@ -71,3 +76,7 @@ h1 { font-family: "Trebuchet MS"; width: 95%;  }
 		.categories ul li { font-weight: normal; font-size: 0.9em; }
 
 
+.noimage { width: 160px; height: 160px; float: left; margin: 0px 10px 10px 0px;}
+.discount { color: red; font-weight: bold; }
+.priceinfo { width: 500px; float: left; text-align: right; }
+.productinfo { clear: both; }

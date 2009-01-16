@@ -1,15 +1,36 @@
-<div style="height: 52px;">
-	<?php for($i=0; $i<8; $i++): ?>
-		<a class="product" href="<?= $this->baseUrl ?>/product/view/id/<?= $x = rand(100, 999); ?>"><?= $x ?></a>
-	<?php endfor; ?>
+<h1><?= $this->product->productName ?></h1>
+<img src="<?= $this->baseUrl ?>/images/image-not-available.jpg" class="noimage"/>
+<div class="priceinfo">
+    <?php if($this->product->price->discount !== NULL): ?>
+        <h2 class="discount"><?= number_format($this->product->price->finalPrice, 2, ",", ".") ?>kn <a href="<?= $this->baseUrl ?>/cart/add/id/<?= $this->product->product_id ?>">Dodaj u košaricu <img src="<?= $this->baseUrl ?>/images/icons/cart_add.png" /></a></h2></span>
+        <p><strong>Cijena:</strong> <?=  number_format($this->product->price->price, 2, ",", ".") ?>kn - <span class="discount">Popust <?= 100*(1-$this->product->price->discount->discountFactor) ?>% </span></p>
+    <?php else: ?>
+        <h2><?=  number_format($this->product->price->finalPrice, 2, ",", ".") ?>kn <a href="<?= $this->baseUrl ?>/cart/add/id/<?= $this->product->product_id ?>">Dodaj u košaricu <img src="<?= $this->baseUrl ?>/images/icons/cart_add.png" /></a></h2>
+    <?php endif; ?>
+    <?php if($this->product->package && ($this->product->save > 0)): ?>
+        <p>Kupnjom ovog paketa uštediti ćete <?= number_format($this->product->save, 2, ",", ".") ?></p>
+    <?php endif; ?>
 </div>
-<p class="clear" style="padding-top: 50px;">
-	<?php
+<div class="productinfo">
+    <p>
+        Proizvođač: <?= $this->product->manufacturer ?><br/>
+        Kratki opis: <?= $this->product->shortDescription ?><br/>
+        Dugi opis: <?= $this->product->longDescription ?><br/>
+    </p>
+    <p>
+        <?php foreach($this->product->attributes as $attr): ?>
+            <strong><?= $attr->name ?>:</strong> <?= $attr->value ?><br/>
+        <?php endforeach; ?>
+    </p>
+    <?php if($this->product->package): ?>
+    <p>
+        <strong>Ovaj Paket sadrži sljedeće artikle:</strong> |
 
-		foreach($this->actions as $action)
-		{
-			echo "$action->time : $action->class $action->action $action->target<br/>";
-		}
-	
-	?>
-</p>
+            <?php foreach($this->product->package as $prod): ?>
+                <a href="<?= $this->baseUrl ?>/product/view/id/<?= $prod->product_id ?>"><?= $prod->manufacturer ?> <?= $prod->productName ?></a>
+                <?php if($prod->amount > 1): ?>(<?= $prod->amount ?>x)<?php endif; ?> |
+            <?php endforeach; ?>
+
+    </p>
+    <?php endif; ?>
+</div>

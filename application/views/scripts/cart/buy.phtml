@@ -1,0 +1,13 @@
+<h1>Izaberite adresu</h1>
+<?php $count = 0; ?>
+<form action="<?= $this->baseUrl ?>/cart/buy2" method="post">
+<p>
+    <?php foreach($this->addresses as $a): ?>
+        <input <?php if($a->addressDefault) echo "checked='checked' "; ?>name="address_id" type="radio" id="id<?= $a->address_id ?>" value="<?= $a->address_id ?>" /> <label for="id<?= $a->address_id ?>"><?= $a->addressStreet . ", " . $a->zipCode . " " . $a->cityName . ", " . $a->countryName ?></label><br/>
+        <?php $count++; ?>
+    <?php endforeach; ?>
+</p>
+<?php if($count > 0): ?>
+<p style="text-align: right; width: 20%; "><input type="submit" value="Naruči" /></p>
+<?php endif; ?>
+</form>

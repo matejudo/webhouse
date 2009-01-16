@@ -46,4 +46,18 @@ try {
 // The front controller is a singleton, and should be setup by now. We 
 // will grab an instance and call dispatch() on it, which dispatches the
 // current request.
-Zend_Controller_Front::getInstance()->dispatch();
+try {
+    Zend_Controller_Front::getInstance()->dispatch();
+} catch (Exception $exception) {
+    echo '<html><body><center>'
+       . 'An exception occured while dispatching the application.';
+    if (defined('APPLICATION_ENVIRONMENT')
+        && APPLICATION_ENVIRONMENT != 'production'
+    ) {
+        echo '<br /><br />' . $exception->getMessage() . '<br />'
+           . '<div align="left">Stack Trace:'
+           . '<pre>' . $exception->getTraceAsString() . '</pre></div>';
+    }
+    echo '</center></body></html>';
+    exit(1);
+}

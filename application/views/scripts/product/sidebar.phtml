@@ -15,9 +15,26 @@
 			echo "<ul>";
 			foreach($item->children as $subitem)
 			{
-				echo "<li><a href='$this->baseUrl/product/category/id/$subitem->category_id'>" . $subitem->categoryName . "</a>";
-				if($subitem->count > 0) echo " ($subitem->count)";
-				echo "</li>";
+                echo "<li>";
+                    if($subitem->count > 0) echo "<a href='$this->baseUrl/product/category/id/$subitem->category_id'>";
+                    echo $subitem->categoryName ;
+                    if($subitem->count > 0) echo "</a>";
+                    if($subitem->count > 0) echo " ($subitem->count)";
+                echo "</li>";
+                if($subitem->children)
+                {
+                    echo "<ul>";
+                    foreach($subitem->children as $subsubitem)
+                    {
+                        echo "<li>";
+                            if($subsubitem->count > 0) echo "<a href='$this->baseUrl/product/category/id/$subsubitem->category_id'>";
+                            echo $subsubitem->categoryName ;
+                            if($subsubitem->count > 0) echo "</a>";
+                            if($subsubitem->count > 0) echo " ($subsubitem->count)";
+                        echo "</li>";
+                    }
+                    echo "</ul>";
+                }
 			}
 			echo "</ul>";
 		}

@@ -26,6 +26,7 @@ class Category extends Zend_Db_Table
 
 	public function getById($category_id)
 	{
+        if(!is_numeric($category_id)) return NULL;
 		return $this->fetchRow("category_id = $category_id");
 	}
 

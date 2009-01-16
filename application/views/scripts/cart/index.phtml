@@ -8,7 +8,7 @@
 			<span class="amount">Količina</span>
 			<span class="total">Ukupno</span>
 		</li>
-		<?php $total = 0; ?>
+		<?php $total = 0; $count = 0; ?>
 		<?php foreach($this->products as $product): ?>
 			<?php if($product->amount == 0) continue; ?>
 			<li class="product">
@@ -17,7 +17,7 @@
 				<span class="amount"><input type="text" name="amount[<?= $product->product_id ?>]" value="<?= $product->amount ?>" /></span>
 				<span class="total"><?= number_format($product->total, 2, ",", ".") ?></span>
 			</li>
-			<?php $total += $product->total; ?>
+			<?php $total += $product->total; $count += $product->amount; ?>
 		<?php endforeach; ?>
 		<li class="product totalrow">
 			<span class="name">Ukupno</span>
@@ -26,4 +26,10 @@
 		</li>
 	</ul>
 </form>
-<p style="text-align: right; width: 93%; "><a href="<?= $this->baseUrl; ?>/cart/buy" class="button">Narudžba &raquo;</a></p>
+<?php $customer = new Customer(); if($customer->isLoggedIn()):?>
+    <?php if($count > 0): ?>
+    <p style="text-align: right; width: 93%; "><a href="<?= $this->baseUrl; ?>/cart/buy" class="button">Narudžba &raquo;</a></p>
+    <?php endif; ?>
+<?php else: ?>
+    <p style="text-align: right; width: 93%; ">Niste ulogirani</p>
+<?php endif; ?>

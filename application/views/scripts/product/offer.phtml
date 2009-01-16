@@ -1,0 +1,25 @@
+<h1>Aktualne ponude</h1>
+
+
+
+<?php foreach($this->offers as $offer): ?>
+    <p>
+        <strong><?= $offer->offerName ?></strong><br/>
+        <?= $offer->offerDescription ?><br/>
+    <ul class="list detail">
+        <li class="product header">
+            <span class="name">Artikl</span>
+            <span class="price">Cijena</span>
+            <span class="cart"><a href="#"><img src="<?= $this->baseUrl ?>/images/icons/cart.png" /></a></span>
+        </li>
+        <?php foreach($offer->products as $product): ?>
+            <li class="product">
+                <a href="<?= $this->baseUrl ?>/product/view/id/<?= $product->product_id ?>">
+                    <span class="name"><?= $product->productName ?><br/><small><?= $product->manufacturer ?></small></span>
+                    <span class="price"><strong><?= number_format($product->price->finalPrice, 2, ",", ".") ?></strong></span>
+                    <span class="cart"><a href="<?= $this->baseUrl ?>/cart/add/id/<?= $product->product_id ?>"><img src="<?= $this->baseUrl ?>/images/icons/cart_add.png" /></a></span>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endforeach; ?>
