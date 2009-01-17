@@ -15,7 +15,9 @@
 			<li><a href="<?= $this->baseUrl ?>/product/category">Ponuda</a></li>
 			<li><a href="<?= $this->baseUrl ?>/cart">Košarica</a></li>
 		</ul>
-		<input id="searchbox" type="text" value="pretraga..." />
+        <form id="search" method="post" action="<?= $this->baseUrl ?>/search/query">
+            <input id="searchbox" type="text" value="pretraga..." onclick="javascript: if(this.value == 'pretraga...') this.value = ''" onblur="javascript: if(this.value == '') this.value = 'pretraga...'" name="query" />
+        </form>
 	</div>
 	<div id="pathbar" class="grid_16">
 		<?php

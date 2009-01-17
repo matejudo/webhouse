@@ -78,12 +78,12 @@ class SessionLog extends Zend_Db_Table
         $this->getAdapter()->query($query);
         $query = "UPDATE productview  SET productviewTime = FROM_UNIXTIME(UNIX_TIMESTAMP(productviewTime)-($timediff)) WHERE session_id = '$this->session_id';";
         $this->getAdapter()->query($query);
-//        $query = "UPDATE searchdetail SET searchdetailTime = FROM_UNIXTIME(UNIX_TIMESTAMP(searchdetailTime)-($timediff)) WHERE session_id = '$this->session_id'";
-//        $this->getAdapter()->query($query);
-
+        $query = "UPDATE search SET searchTime = FROM_UNIXTIME(UNIX_TIMESTAMP(searchTime)-($timediff)) WHERE session_id = '$this->session_id';";
+        $this->getAdapter()->query($query);
+        $query = "UPDATE searchdetail SET searchdetailTime = FROM_UNIXTIME(UNIX_TIMESTAMP(searchdetailTime)-($timediff)) WHERE search_id IN (SELECT search_id FROM search WHERE session_id = '$this->session_id')";
+        $this->getAdapter()->query($query);
         $query = "SELECT order_id FROM `order` WHERE session_id = '$this->session_id';";
         $order_id = $this->getAdapter()->fetchOne($query);
-
         $query = "UPDATE orderdetail SET orderdetailTime = FROM_UNIXTIME(UNIX_TIMESTAMP(orderdetailTime)-($timediff)) WHERE order_id = $order_id;";
         $this->getAdapter()->query($query);
     }

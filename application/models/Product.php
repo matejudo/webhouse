@@ -80,8 +80,6 @@ class Product extends Zend_Db_Table
             $product->price = $this->getPrice($product->product_id, true);
 
         }
-                            echo"<p><pre>";var_dump($products);echo"</pre></p>";
-            var_dump("------------------------");
         return $products;
     }
 

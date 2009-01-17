@@ -80,3 +80,7 @@ h1 { font-family: "Trebuchet MS"; width: 95%;  }
 .discount { color: red; font-weight: bold; }
 .priceinfo { width: 500px; float: left; text-align: right; }
 .productinfo { clear: both; }
+
+.pag-link { padding: 0 2px 0 2px; border: 1px solid #a1c2dd; text-decoration: none; color: black; }
+.pag-cur  { padding: 0 2px 0 2px; text-decoration: none; color: black; }
+.paginationControl { text-align: center; }

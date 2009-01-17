@@ -1,0 +1,22 @@
+<h1>Rezultati pretrage</h1>
+    <p><strong>Vaša pretraga je dala <?= $this->count ?> rezultata</strong></p>
+
+<?= $this->paginationControl($this->paginator,
+                             'Sliding', "pagination.phtml"); ?>
+<ul class="list detail">
+	<li class="product header">
+		<span class="name">Artikl</span>
+	</li>
+
+	<?php $i = 1; foreach($this->paginator as $result): ?>
+		<li class="product">
+            <?php $j = ($this->page-1)*10 + $i; ?>
+            <a href="<?= $this->baseUrl ?>/search/click/no/<?= $j ?>/id/<?= $result->product_id ?>">
+                <span class="name"><?= $result->productName ?><br/><small><?= $result->manufacturer ?></small></span>
+            </a>
+		</li>
+	<?php $i++; endforeach; ?>
+</ul>
+
+<?= $this->paginationControl($this->paginator,
+                             'Sliding', "pagination.phtml"); ?>
