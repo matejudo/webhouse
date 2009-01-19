@@ -3,6 +3,13 @@
 class Product extends Zend_Db_Table
 {
 	protected $_name = "product";
+	protected $session = NULL;
+
+	public function __construct()
+	{
+		$this->session =  new SessionLog();
+		parent::__construct();
+	}
 
 	public function getByCategory($category_id)
 	{
@@ -10,9 +17,11 @@ class Product extends Zend_Db_Table
 			   . "WHERE p.category_id = $category_id";
 
 		$products = $this->getAdapter()->fetchAll($query);
+		$query = "";
         foreach($products as $product)
         {
             $product->price = $this->getPrice($product->product_id, true);
+			$product->sex = $this->getSex($product->product_id);
         }
         return $products;
 	}
@@ -22,14 +31,20 @@ class Product extends Zend_Db_Table
 		return $this->getAdapter()->query("SELECT COUNT(*) FROM product WHERE product_id = $product_id");
 	}
 
+	public function getSex($product_id)
+	{
+		$query = "SELECT attributeValue FROM `attribute` WHERE attributetype_id = 1943 AND product_id = $product_id";
+		return $this->getAdapter()->fetchOne($query);
+	}
+
 	public function getPrice($product_id, $object = false)
 	{
-
-        $query = "SELECT * FROM price WHERE product_id = $product_id ORDER BY priceTime DESC LIMIT 1";
+		$timestamp = $this->session->getTime(true);
+        $query = "SELECT * FROM price WHERE product_id = $product_id AND priceTime < '$timestamp' ORDER BY priceTime DESC LIMIT 1";
 		$price = $this->getAdapter()->fetchRow($query);
         if($price->discount_id !== NULL)
         {
-            $query = "SELECT * FROM discount WHERE discount_id = $price->discount_id AND CURRENT_TIMESTAMP > discountBeginDate AND  CURRENT_TIMESTAMP < discountEndDate";
+            $query = "SELECT * FROM discount WHERE discount_id = $price->discount_id AND '$timestamp' > discountBeginDate AND  '$timestamp' < discountEndDate";
             $price->discount = $this->getAdapter()->fetchRow($query);
             $price->finalPrice = $price->price * $price->discount->discountFactor;
         }
@@ -50,7 +65,9 @@ class Product extends Zend_Db_Table
 
 	public function getById($product_id)
 	{
-		$query = "SELECT p.*, m.manufacturerName AS manufacturer FROM product p LEFT OUTER JOIN manufacturer m ON p.manufacturer_id = m.manufacturer_id WHERE p.product_id = $product_id";
+		$query = "SELECT p.*, m.manufacturerName AS manufacturer FROM product p "
+			   . "LEFT OUTER JOIN manufacturer m ON p.manufacturer_id = "
+			   . "m.manufacturer_id WHERE p.product_id = $product_id";
         $product = $this->getAdapter()->fetchRow($query);
         $product->price = $this->getPrice($product_id, true);
         $product->attributes = $this->getAttributes($product_id);
@@ -94,11 +111,49 @@ class Product extends Zend_Db_Table
         return $sum;
     }
 
+	public function getTopProducts($number)
+	{
+		$query = "SELECT product_id, SUM(orderdetailDelta) FROM orderdetail GROUP BY product_id ORDER BY 2 DESC LIMIT 0, $number";
+		$results = $this->getAdapter()->fetchAll($query);
+
+		foreach($results as $result)
+		{
+			$result->product = $this->getById($result->product_id);
+		}
+		return $results;
+	}
+
 	/**
 	 * F-ja koja generira cijene za sve proizvode
 	 */
-	public function genprice()
+	public function genprice($start, $end, $all = true)
 	{
+
+
+		$session = new SessionLog();
+		$prices = $this->getAdapter()->fetchAll("SELECT * FROM price GROUP BY product_id");
+		foreach($prices as $price)
+		{
+			$factor = rand(76, 123)/100;
+			$rand = rand($start, $end);
+			$this->getAdapter()->query("INSERT INTO price VALUES(NULL, $price->product_id, NULL, $price->price * $factor, '2008-01-01 00:00:00')"); //this->getAdapter()->
+			//
+			
+			//echo "update price set priceTime = '" . $session->timeP2M($rand) . "' WHERE price_id = " . $price->price_id . "<br>"; //this->getAdapter()->
+		}
+
+
+		// *********************************************************************************
+//		$session = new SessionLog();
+//		$prices = $this->getAdapter()->fetchAll("SELECT * FROM price");
+//		foreach($prices as $price)
+//		{
+//			$rand = rand($start, $end);
+//			$this->getAdapter()->query("update price set priceTime = '" . $session->timeP2M($rand) . "' WHERE price_id = " . $price->price_id); //this->getAdapter()->
+//			//echo "update price set priceTime = '" . $session->timeP2M($rand) . "' WHERE price_id = " . $price->price_id . "<br>"; //this->getAdapter()->
+//		}
+		// *********************************************************************************
+		/*
 		$query = "SELECT product_id from product";
 		$result = $this->getAdapter()->fetchAll($query);
 
@@ -109,5 +164,7 @@ class Product extends Zend_Db_Table
 
 			$this->getAdapter()->query($string);
 		}
+		 * */
+
 	}
 }

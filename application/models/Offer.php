@@ -13,7 +13,7 @@ class Offer extends Zend_Db_Table
     public function getOffers()
     {
         $query = "SELECT o.* FROM offer o "
-               . "WHERE CURRENT_TIMESTAMP BETWEEN o.offerBeginDate AND o.offerEndDate";
+		. "WHERE '". $this->session->getTime(true) ."' BETWEEN o.offerBeginDate AND o.offerEndDate";
         $offers = $this->getAdapter()->fetchAll($query);
         $products = new Product();
         foreach($offers as $offer)

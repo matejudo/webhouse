@@ -9,11 +9,6 @@ fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td
 	{ margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
 body { font: 62.5%/1.5  Tahoma, Verdana, sans-serif; }
-h1 { font-size: 2.2em; }
-h2 { font-size: 1.8em; }
-h3 { font-size: 1.6em; }
-h4 { font-size: 1.4em; }
-h5 { font-size: 1.2em; }
 p, ul, ol { font-size: 1.2em; }
 ul p, ul ul, ul ol, ol ul, ol ol, ol p { font-size: 1em; }
 ol, ul { list-style: none; }

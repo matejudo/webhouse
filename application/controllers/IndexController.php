@@ -17,6 +17,10 @@ class IndexController extends Zend_Controller_Action
 	
 	function omgAction()
 	{
-	
+		$this->renderScript("index/index.phtml");
+		$countries = array();
+		echo "<p>";
+		echo "lool";
+		echo "</p>";
 	}
 }

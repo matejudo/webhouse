@@ -5,33 +5,39 @@
     <p>
         Kupac:
         <select name="customer_id">
+			<?php $i = 0; $randc = rand(0,79); ?>
             <?php foreach($this->customers as $customer): ?>
-                <option value="<?= $customer->customer_id ?>"><?= $customer->customerLastname . ", " .  $customer->customerFirstname . " (" . $customer->orderCount . ")" ?></option>
-            <?php endforeach; ?>
+                <option  <?php if($i == $randc) echo "selected='selected'"?> value="<?= $customer->customer_id ?>"><?= $customer->customerTitle . ". " . $customer->customerLastname . ", " .  $customer->customerFirstname . " (" . $customer->countryCode ." - " . $customer->orderCount . ")" ?></option>
+            <?php $i++; endforeach; ?>
         </select>
-        <br/>(U zagradi je vidljiv broj obavljenih transakcija)
+        <br/>(U zagradi je vidljiva zemlja kupca te broj obavljenih transakcija)
     </p>
     <p>
         Datum:
         <select name="year">
             <option value="2008">2008</option>
-            <option value="2009">2009</option>
+            <option value="2009" <?php if(rand(1,13) == 13) { echo "selected='selected'"; $randyear = 2009; }?>>2009</option>
         </select>
         <select name="month">
+
             <?php $months = array(1=>"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"); ?>
+			<?php $daysperm = array(1=>31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31); ?>
+			<?php $randmonth = rand(1,12); if($randyear == 2009) $randmonth = 1; ?>
+			<?php $randhour = rand(0,23); if($randhour < 9 || $randhour > 20) $randhour = rand(0,23); if($randhour < 9 || $randhour > 20) $randhour = rand(0,23); if($randhour < 6 || $randhour > 22) $randhour = rand(0,23); ?>
+			<?php $randday = rand(1,$daysperm[$randmonth]); if($randyear == 2009) $randday = rand(1,15); ?>
             <?php for($i=1; $i<13; $i++): ?>
-                <option value="<?= $i ?>"><?= $months[$i] ?></option>
+                <option value="<?= $i ?>" <?php if($i == $randmonth) echo "selected='selected'"?>><?= $months[$i] ?></option>
             <?php endfor; ?>
         </select>
         <select name="day">
             <?php for($i=1; $i<32; $i++): ?>
-                <option value="<?= $i ?>"><?= str_repeat("0",(2 + -1 - floor(log10($i)))) . $i  ?></option>
+                <option value="<?= $i ?>" <?php if($i == $randday) echo "selected='selected'"?>><?= str_repeat("0",(2 + -1 - floor(log10($i)))) . $i  ?></option>
             <?php endfor; ?>
         </select>
         Sat:
         <select name="hour">
             <?php for($i="00"; $i<24; $i++): ?>
-                <option value="<?= $i ?>"> <?= str_repeat("0",(2 + -1 - floor(log10($i)))) . $i ?> </option>
+                <option value="<?= $i ?>" <?php if($i == $randhour) echo "selected='selected'"?>> <?= str_repeat("0",(2 + -1 - floor(log10($i)))) . $i ?> </option>
             <?php endfor; ?>
         </select>
         <br/>(Unos vremena posjeta. Minute i sekunde odgovaraju stvarnom vremenu)
@@ -40,4 +46,3 @@
         <input type="submit" value="Log in" />
     </p>
 </form>
-

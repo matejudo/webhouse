@@ -3,16 +3,20 @@
 <ul class="list detail">
 	<li class="product header">
 		<span class="name">Artikl</span>
+		<span class="sex">&nbsp;</span>
 		<span class="price">Cijena</span>
 		<span class="cart"><a href="#"><img src="<?= $this->baseUrl ?>/images/icons/cart.png" /></a></span>
 	</li>
 	<?php foreach($this->products as $product): ?>
 		<li class="product">
+			<?php if($product->sex == "z") $icon ="<img src='".$this->baseUrl."/images/icons/user_female.png' />";  elseif($product->sex == "m") $icon ="<img src='".$this->baseUrl."/images/icons/user.png' />"; else $icon ="&nbsp;"; ?>
             <a href="<?= $this->baseUrl ?>/product/view/id/<?= $product->product_id ?>">
                 <span class="name"><?= $product->productName ?><br/><small><?= $product->manufacturer ?></small></span>
+				<span class="sex"><?= $icon ?></span>
                 <span class="price<?php if($product->price->discount) echo " discount"; ?>"><strong><?= number_format($product->price->finalPrice, 2, ",", ".") ?></strong></span>
                 <span class="cart"><a href="<?= $this->baseUrl ?>/cart/add/id/<?= $product->product_id ?>"><img src="<?= $this->baseUrl ?>/images/icons/cart_add.png" /></a></span>
             </a>
+			<?php $icon = ""; ?>
 		</li>
 	<?php endforeach; ?>
 </ul>

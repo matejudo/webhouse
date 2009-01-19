@@ -39,6 +39,15 @@ class ProductController extends Zend_Controller_Action
     {
         $offers = new Offer();
         $this->view->offers = $offers->getOffers();
+		$products = new Product();
+		$this->view->topprod = $products->getTopProducts(5);
+		$customer = new Customer();
+		
+//		echo $this->session->timeM2P("2008-09-15 00:00:00");
+//		echo " - ";
+//		echo $this->session->timeM2P("2009-01-17 08:00:00");
+//		$products = new Product();
+		//$products->genprice($this->session->timeM2P("2008-09-15 00:00:00"), $this->session->timeM2P("2009-01-17 08:00:00"));
     }
 
     function viewAction()
@@ -48,12 +57,10 @@ class ProductController extends Zend_Controller_Action
         $this->session->logProduct($product_id);
         $this->view->product = $product->getById($product_id);
         if($product->isPackage($product_id))
-        {
-            
+        {            
             $this->view->product->package = $product->getPackageProducts($product_id);
             $this->view->product->sumprice = $product->getPackageSumPrice($product_id);
             $this->view->product->save = $product->getPackageSumPrice($product_id) - $this->view->product->price->finalPrice;
         }
-
     }
 }

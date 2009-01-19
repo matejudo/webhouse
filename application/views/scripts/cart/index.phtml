@@ -25,6 +25,7 @@
 			<span class="total"><?= number_format($total, 2, ",", ".") ?></span>
 		</li>
 	</ul>
+	<p style="text-align: right; margin-right: 5%;">Za vađenje artikla, unesite količinu 0.</p>
 </form>
 <?php $customer = new Customer(); if($customer->isLoggedIn()):?>
     <?php if($count > 0): ?>

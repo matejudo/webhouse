@@ -4,6 +4,11 @@ ul, ol, dl, p { margin-bottom: 1.5em; margin-left: 10px; font-size: 12px;}
 ul, ol, dl, p { margin-bottom: 1.5em; }
 ul, ol, dl { margin-bottom: 1.8em; }
 p { margin-bottom: 1.5em; }
+h1 { font-size: 2em; }
+h2 { font-size: 1.8em; }
+h3 { font-size: 1.6em; }
+h4 { font-size: 1.4em; }
+h5 { font-size: 1.2em; }
 
 body { background: #e6ceac url(../images/topbg.jpg) no-repeat top center; }
 
@@ -46,8 +51,10 @@ h1 { font-family: "Trebuchet MS"; width: 95%;  }
     .detail .header:hover { background: #484e54 !important; color: white;  }
 	.detail .product {  height: 20px; border-bottom: 1px solid #a1c2dd; clear: both; padding: 5px 0px 5px 0px; line-height: 0.8em; padding-left: 2%; }
     .detail .product:hover { background: #eee; }
+
 		.detail .product span { display:block; float: left; }
-		.detail .product .name { width: 80%; }
+		.detail .product .name { width: 76%; }
+		.detail .product .sex {  width: 4%; }
 		.detail .header .name { line-height: 1.5em; }
 		.detail .product .price { width: 10%; text-align: right;  line-height: 1.5em;}
 		.detail .product .cart { width: 8%; text-align: right; margin-right: 2%; color: #999; line-height: 1.5em;}
@@ -70,8 +77,10 @@ h1 { font-family: "Trebuchet MS"; width: 95%;  }
 		.cart .totalrow .recalc input { text-align: center; border: 1px solid #a1c2dd; background: white; cursor: pointer; }
 
 
-.categories { margin-left: 10px; margin-top: 20px; }
-	.categories li { font-weight: bold; }
+.categories { margin-left: 10px; margin-top: 20px; color: #666; }
+	.categories a { color: #ac825c; text-decoration: none; }
+	.categories a:hover { color: black; text-decoration: none; }
+	.categories li { font-weight: bold;  }
 	.categories ul { margin: 0 0 10px 10px; }
 		.categories ul li { font-weight: normal; font-size: 0.9em; }
 

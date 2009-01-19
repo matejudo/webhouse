@@ -7,9 +7,9 @@ class Category extends Zend_Db_Table
 	public function getTree($id = NULL)
 	{
 		if($id === NULL)
-			$query = "SELECT * FROM category WHERE parent_id IS NULL";
+			$query = "SELECT * FROM category WHERE parent_id IS NULL ORDER BY categoryOrdering";
 		else
-			$query = "SELECT * FROM category WHERE parent_id = $id";
+			$query = "SELECT * FROM category WHERE parent_id = $id  ORDER BY categoryOrdering";
 		$result = $this->getAdapter()->fetchAll($query);
 
 		$query = "SELECT category_id, COUNT(*) FROM product GROUP BY 1";

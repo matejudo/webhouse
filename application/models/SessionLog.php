@@ -47,19 +47,18 @@ class SessionLog extends Zend_Db_Table
 		return Zend_Session::getId();
 	}
 
-    function timeM2P($mysqldate)
+    public function timeM2P($mysqldate)
     {
         return strtotime( $mysqldate );
     }
 
-    function timeP2M($phpdate)
+    public function timeP2M($phpdate)
     {
         return date( 'Y-m-d H:i:s', $phpdate );
     }
 
     public function getTime($mysqlFormat = false)
     {
-        //var_dump ($this->session_vars->timediff);
         $timediff = ($this->session_vars->timediff !== NULL) ?  $this->session_vars->timediff : 0;
         if($mysqlFormat)
         {
